@@ -3,7 +3,7 @@ https://colinhacks.com/essays/building-a-spa-with-nextjs
 - create next app and intall react router and use colins ultra basic RR SPA
 - next dev --->     ERROR::::    Invariant failed: Browser history needs a DOM
 
-* Turns out this article assumes RR v5 and by defult installs now get v6 which does not
+* Turns out this article assumes RR v5 and by default installs now get v6 which does not
   have switch, for one thing. So I uninstall react-router-dom and then:
 npm install react-router-dom@5
 
@@ -33,8 +33,19 @@ and gives us a new error. Correction, 3 errors. First two are same but with diff
 (Our errors are just different than the article. Perhaps we are showing a more generic version of the error.)
 
 So we add a special FLAG for a warning suppression to the outer div in _app.tsx:
-<div suppressHydrationWarning>
+<div suppressHydrationWarning>  OR  <div suppressHydrationWarning={true}>
 * * * Hmmm .. this does not seem to work as the article promises. Even after a dev server restart; no effect.
+
+---------------------------------------
+Neither works. Cannot suppress hydration warning. This feature might no longer exist OR it is a React feature and
+Next.js can no longer use it. Article may be out of date in this sense. I also tried using 'next/dynamic'.
+Can't yet see where to fit it in. Seems to need to be where the component will be IMPORTED but I'm guessing wildly.
+    import dynamic from 'next/dynamic'
+    const NavBar = dynamic(() => import("/path/of/NavBar"), { ssr: false }) //<- set
+This came from:
+https://stackoverflow.com/questions/67256421/is-there-any-way-to-suppress-hydration-warning-in-react-fc
+-------------------------------------------
+
 
 
 

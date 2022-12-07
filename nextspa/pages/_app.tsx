@@ -2,9 +2,10 @@ import '../styles/globals.css'  // From CNA
 import { AppProps } from 'next/app';
 
 function App({ Component, pageProps }: AppProps) {
-  return (
-      <div suppressHydrationWarning>
-        {typeof window === 'undefined' ? null : <Component {...pageProps} />}
+  // @ts-ignore
+    return (
+      <div suppressHydrationWarning={true}>
+        {typeof window === 'undefined' ? null : <Component {...pageProps} suppressHydrationWarning={true} />}
       </div>
   );
 }
