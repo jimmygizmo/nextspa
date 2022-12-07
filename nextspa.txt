@@ -44,6 +44,8 @@ Can't yet see where to fit it in. Seems to need to be where the component will b
     const NavBar = dynamic(() => import("/path/of/NavBar"), { ssr: false }) //<- set
 This came from:
 https://stackoverflow.com/questions/67256421/is-there-any-way-to-suppress-hydration-warning-in-react-fc
+See also:
+https://blog.bitsrc.io/using-non-ssr-friendly-components-with-next-js-916f38e8992c
 -------------------------------------------
 
 
