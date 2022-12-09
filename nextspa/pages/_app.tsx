@@ -1,9 +1,11 @@
 import '../styles/globals.css'  // From CNA
 import { AppProps } from 'next/app';
+import dynamic from 'next/dynamic'
 
 // No success with 'next/dynamic' yet. I think it can be anything inside the anon func.
 // import dynamic from 'next/dynamic'
 // const NavBar = dynamic(() => import("/path/of/NavBar"), { ssr: false })
+
 
 
 function App({ Component, pageProps }: AppProps) {
@@ -14,7 +16,10 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
+// @ts-ignore
+// export default dynamic(App, {ssr: false});
 export default App;
+
 
 // I even tried export default dynamic(App etc..) .. no good.
 // That attempt failed with an error could not destructure Component out of { Component, pageProps } because

@@ -48,7 +48,11 @@ See also:
 https://blog.bitsrc.io/using-non-ssr-friendly-components-with-next-js-916f38e8992c
 -------------------------------------------
 
+* I found another article on the topic - will update here once I read it:
+https://towardsdev.com/how-to-build-spa-with-nextjs-2ba6e6b6f564
 
-
-
+UPDATE: Above, a custom router is created and works rather well underneath a simple Next dynamic route.
+However, Now Next.js has Layouts and everything is pointing in the direction to use those for this purpose.
+So I will do that in this repo. I may re-create the next app and start fresh with a good layout tutorial.
+TODO: Update README.md
 
