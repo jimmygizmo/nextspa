@@ -1,58 +1,14 @@
-https://colinhacks.com/essays/building-a-spa-with-nextjs
+all experiments with combining nextjs with react router or a custom router never worked out great due somewhat
+to recent changes in next, but in general results lead to trying nextjs layouts next.
+again, the goal is to be able to build something close to an SPA like done with react router and
+do it within a nextjs site.
 
-- create next app and intall react router and use colins ultra basic RR SPA
-- next dev --->     ERROR::::    Invariant failed: Browser history needs a DOM
+https://nextjs.org/docs/basic-features/layouts
+Related:
+https://nextjs.org/docs/advanced-features/custom-app
 
-* Turns out this article assumes RR v5 and by default installs now get v6 which does not
-  have switch, for one thing. So I uninstall react-router-dom and then:
-npm install react-router-dom@5
+--------
+Some versions (all the latest, pretty much.):    NODE: v19.1.0    NEXT: 13.0.6    REACT: 18.2.0
 
-* Now a related topic .. Typescript was default selected and agreed Yes during CNA, BUT TS creates issues for RR:
-https://www.pluralsight.com/guides/react-router-typescript
-** To save time and solve TS linting issues later, use:
-// @ts-ignore
 
-NOW, RE the error:
-"This happens because Next.js tries to pre-render your pages on the development server in development mode.
-React Router, on the other hand, requires access to the global window object provided by the browser.
-Because window isn't available in the server environment, React Router craps out."
-
-**** SOLUTION! Make it a custom app. Add the file: /pages/_app.tsx OR /pages/_app.js if you are lazy and mediocre.)
-
-The simple hack added to return null for the app when there is no window object solves the first error apparently
-and gives us a new error. Correction, 3 errors. First two are same but with different call stacks.:
-    ERROR 1 and 2::::    Error: Hydration failed because the initial UI does not match what was rendered on the server.
-    ERROR 3::::    Error: There was an error while hydrating. Because the error happened outside of a Suspense
-                          boundary, the entire root will switch to client rendering.
-
-* Article actually tells us to expect a different error: "Expected server HTML to contain a matching div"
-** Anyhow notice it says it is switching to client rendering which is exactly what was intended at the moment.
-
-******** BUT HEY!! These are warnings in the browser window that you can close and then you will see that
-    the React Router SPA is working !!!!
-(Our errors are just different than the article. Perhaps we are showing a more generic version of the error.)
-
-So we add a special FLAG for a warning suppression to the outer div in _app.tsx:
-<div suppressHydrationWarning>  OR  <div suppressHydrationWarning={true}>
-* * * Hmmm .. this does not seem to work as the article promises. Even after a dev server restart; no effect.
-
----------------------------------------
-Neither works. Cannot suppress hydration warning. This feature might no longer exist OR it is a React feature and
-Next.js can no longer use it. Article may be out of date in this sense. I also tried using 'next/dynamic'.
-Can't yet see where to fit it in. Seems to need to be where the component will be IMPORTED but I'm guessing wildly.
-    import dynamic from 'next/dynamic'
-    const NavBar = dynamic(() => import("/path/of/NavBar"), { ssr: false }) //<- set
-This came from:
-https://stackoverflow.com/questions/67256421/is-there-any-way-to-suppress-hydration-warning-in-react-fc
-See also:
-https://blog.bitsrc.io/using-non-ssr-friendly-components-with-next-js-916f38e8992c
--------------------------------------------
-
-* I found another article on the topic - will update here once I read it:
-https://towardsdev.com/how-to-build-spa-with-nextjs-2ba6e6b6f564
-
-UPDATE: Above, a custom router is created and works rather well underneath a simple Next dynamic route.
-However, Now Next.js has Layouts and everything is pointing in the direction to use those for this purpose.
-So I will do that in this repo. I may re-create the next app and start fresh with a good layout tutorial.
-TODO: Update README.md
 
